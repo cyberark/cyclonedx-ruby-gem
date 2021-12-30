@@ -147,14 +147,14 @@ class Bombuilder
       object.version = dependency.version
       object.purl = purl(object.name, object.version)
 
-      if dependency.source.is_a?(Bundler::Source::Path) && !dependency.source.is_a?(Bundler::Source::Git)
-        object.path = "path"
-        object.path_ref = dependency.source.path
-      elsif dependency.source.is_a?(Bundler::Source::Git)
+      if dependency.source.is_a?(Bundler::Source::Git)
         git_source = dependency.source.uri
         git_branch = dependency.source.ref
         object.uri_ref = "#{git_source}/#{git_branch}"
         object.github = "github"
+      elsif dependency.source.is_a?(Bundler::Source::Path)
+        object.path = "path"
+        object.path_ref = dependency.source.path
       end
 
       unless dependency.source.is_a?(Bundler::Source::Rubygems)
