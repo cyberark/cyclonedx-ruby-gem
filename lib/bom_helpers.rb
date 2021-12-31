@@ -46,18 +46,15 @@ def build_bom(gems)
             end
             if gem['gem']
              xml.properties do
-                xml.property_ gem['gem'], name: 'type'
-                xml.property_ gem['remotes_ref'], name: 'ref'
+                xml.property_ gem['remotes_ref'], name: gem['gem']
               end
             elsif gem['github']
               xml.properties do
-                xml.property_ gem['github'], name: 'type'
-                xml.property_ gem['uri_ref'], name: 'ref'
+                xml.property_ gem['uri_ref'], name: gem['github']
               end
             elsif gem['path']
               xml.properties do
-                xml.property_ gem['path'], name: 'type'
-                xml.property_ gem['path_ref'], name: 'ref'
+                xml.property_ gem['path_ref'], name: gem['path']
               end
             end
             if gem['license_id']
