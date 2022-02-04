@@ -33,12 +33,6 @@ def build_bom(gems)
   builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
     attributes = { 'xmlns' => 'http://cyclonedx.org/schema/bom/1.3', 'version' => '1', 'serialNumber' => random_urn_uuid }
     xml.bom(attributes) do
-      xml.metadata do
-        xml.component('type' => 'application') do
-          xml.name @options[:proj_name]
-          xml.version @options[:rendition]
-        end  
-      end
       xml.components do
         gems.each do |gem|
           xml.component('type' => 'library') do
