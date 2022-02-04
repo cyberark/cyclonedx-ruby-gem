@@ -81,6 +81,12 @@ class Bombuilder
       opts.on('-p', '--path path', '(Required) Path to Ruby project directory') do |path|
         @options[:path] = path
       end
+      opts.on('-n', '--name', '(Required) Project name <org/repo>') do |proj_name|
+        @options[:proj_name] = proj_name
+      end
+      opts.on('-r', '--rendition', '(Required) Project Version') do |rendition|
+        @options[:rendition] = rendition
+      end
       opts.on('-o', '--output bom_file_path', '(Optional) Path to output the bom.xml file to') do |bom_file_path|
         @options[:bom_file_path] = bom_file_path
       end
@@ -103,6 +109,16 @@ class Bombuilder
 
     if @options[:path].nil?
       @logger.error('missing path to project directory')
+      abort
+    end
+
+    if @options[:proj_name].nil?
+      @logger.error('missing project name')
+      abort
+    end
+
+    if @options[:rendition].nil?
+      @logger.error('missing project version')
       abort
     end
 
